@@ -10,7 +10,7 @@ function getComputerChoice() {
     const minCeiled = Math.ceil(0);
     const maxFloored = Math.floor(3);
     let num = Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
-    console.log("computer chose " + validMoves[num]);
+    // console.log("computer chose " + validMoves[num]);
     return num;
 }
 
@@ -21,7 +21,7 @@ function getHumanChoice() {
     const validMoves = ["rock", "paper", "scissors"];
     let humanChoice = prompt("Do you want to play rock, paper, or scissors?");
     // if (humanChoice.toLowerCase() === "rock" || "paper" || "scissors")
-    console.log("you chose " + humanChoice.toLowerCase());
+    // console.log("you chose " + humanChoice.toLowerCase());
     num = validMoves.indexOf(humanChoice.toLowerCase());
     
     return num; 
@@ -50,46 +50,46 @@ function playRound(humanChoice, computerChoice) {
         var winner = "Computer";
     }
     else {
-        var winner = "Tie";
+        var winner = "No One";
     }
     return winner;
 }
 
 /*
-computer score = 0
-player score = 0
+scores:
+    human = 0
+    computer = 0
+    tie = 0
 loop 5 times:
     play round
-    if winner is computer, add point to computer's score
-    if winner is human, add point to human's score
-    if winner is tie, add point to both scores
+    add points to winner's score
     if computer score > human score, computer wins
     else if computer score < human score, human wins
     else tie
 
 */
 function playGame() {
-    var scores = {"Computer": 0, "Human": 0, "Tie": 0};
+    var scores = {"Computer": 0, "Human": 0, "No One": 0};
     for (let i = 0; i < 5; i++) {
         roundWinner = playRound(getHumanChoice(), getComputerChoice());
         console.log(roundWinner + " wins round");
         scores[roundWinner] += 1;
     }
-    console.log(scores);
+    // console.log(scores);
     // console.log(Object.values(scores));
     // let topScores = Math.max(Object.values(scores["Computer"]), Object.values(scores["Human"]));
     // console.log(topScores);
     if (scores["Computer"] === scores["Human"])
     {
-        console.log("Game Result: You Tied!")
+        return "Game Result: You Tied!"
     }
     else if (scores["Computer"] < scores["Human"]) {
-        console.log("Game Result: You Win!")
+        return "Game Result: You Win!"
     }
     else {
-        console.log("Game Result: You Lose.")
+        return "Game Result: You Lose."
     }
 }
 
-playGame();
-
+var winner = playGame();
+console.log(winner);
