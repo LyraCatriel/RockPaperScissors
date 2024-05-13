@@ -41,18 +41,55 @@ function mod(n, m) {
 }
 
 function playRound(humanChoice, computerChoice) {
-    let winner = "No Winner"
+    // let winner = "";
     let result = (mod((humanChoice - computerChoice), 3));
     if (result === 1) {
-        winner = "Human";
+        var winner = "Human";
     }
     else if (result === 2) {
-        winner = "Computer";
+        var winner = "Computer";
     }
     else {
-        winner = "Tie";
+        var winner = "Tie";
     }
     return winner;
 }
 
-console.log(playRound(getHumanChoice(), getComputerChoice()) + " wins");
+/*
+computer score = 0
+player score = 0
+loop 5 times:
+    play round
+    if winner is computer, add point to computer's score
+    if winner is human, add point to human's score
+    if winner is tie, add point to both scores
+    if computer score > human score, computer wins
+    else if computer score < human score, human wins
+    else tie
+
+*/
+function playGame() {
+    var scores = {"Computer": 0, "Human": 0, "Tie": 0};
+    for (let i = 0; i < 5; i++) {
+        roundWinner = playRound(getHumanChoice(), getComputerChoice());
+        console.log(roundWinner + " wins round");
+        scores[roundWinner] += 1;
+    }
+    console.log(scores);
+    // console.log(Object.values(scores));
+    // let topScores = Math.max(Object.values(scores["Computer"]), Object.values(scores["Human"]));
+    // console.log(topScores);
+    if (scores["Computer"] === scores["Human"])
+    {
+        console.log("Game Result: You Tied!")
+    }
+    else if (scores["Computer"] < scores["Human"]) {
+        console.log("Game Result: You Win!")
+    }
+    else {
+        console.log("Game Result: You Lose.")
+    }
+}
+
+playGame();
+
