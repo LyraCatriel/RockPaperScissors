@@ -10,7 +10,7 @@ function getComputerChoice() {
     const minCeiled = Math.ceil(0);
     const maxFloored = Math.floor(3);
     let num = Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
-    // console.log("computer chose " + validMoves[num]);
+    console.log("computer chose " + validMoves[num]);
     return num;
 }
 
@@ -19,11 +19,20 @@ Get user input ("Do you want to play rock, paper, or scissors?"), return input
 */
 function getHumanChoice() {
     const validMoves = ["rock", "paper", "scissors"];
-    let humanChoice = prompt("Do you want to play rock, paper, or scissors?");
-    // if (humanChoice.toLowerCase() === "rock" || "paper" || "scissors")
-    // console.log("you chose " + humanChoice.toLowerCase());
+    let humanChoice
+    let playPrompt = "Let's play rock paper scissors! Pick rock, paper, or scissors.";
+    while (true) {
+        humanChoice = prompt(playPrompt);
+        if (validMoves.includes(humanChoice)) {
+
+            break;
+        }
+        else {
+            playPrompt = "Not a valid response. Pick rock, paper, or scissors.";
+        }
+    }
     num = validMoves.indexOf(humanChoice.toLowerCase());
-    
+
     return num; 
 }
 
@@ -37,11 +46,10 @@ otherwise tie
 */
 
 function mod(n, m) {
-  return ((n % m) + m) % m;
+    return ((n % m) + m) % m;
 }
 
 function playRound(humanChoice, computerChoice) {
-    // let winner = "";
     let result = (mod((humanChoice - computerChoice), 3));
     if (result === 1) {
         var winner = "Human";
@@ -66,10 +74,9 @@ loop 5 times:
     if computer score > human score, computer wins
     else if computer score < human score, human wins
     else tie
-
 */
 function playGame() {
-    var scores = {"Computer": 0, "Human": 0, "No One": 0};
+    var scores = { "Computer": 0, "Human": 0, "No One": 0 };
     for (let i = 0; i < 5; i++) {
         roundWinner = playRound(getHumanChoice(), getComputerChoice());
         console.log(roundWinner + " wins round");
@@ -79,8 +86,7 @@ function playGame() {
     // console.log(Object.values(scores));
     // let topScores = Math.max(Object.values(scores["Computer"]), Object.values(scores["Human"]));
     // console.log(topScores);
-    if (scores["Computer"] === scores["Human"])
-    {
+    if (scores["Computer"] === scores["Human"]) {
         return "Game Result: You Tied!"
     }
     else if (scores["Computer"] < scores["Human"]) {
