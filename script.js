@@ -34,7 +34,7 @@ function getHumanChoice() {
     }
     num = validMoves.indexOf(humanChoice.toLowerCase());
 
-    return num; 
+    return num;
 }
 
 function mod(n, m) {
@@ -79,38 +79,38 @@ loop 5 times:
 */
 function playGame(humanChoice) {
     const pItem = document.querySelector("p");
-    // var scores = { "Computer": 0, "Human": 0, "No One": 0 };
-    // for (let i = 0; i < 5; i++) {
-    roundWinner = playRound(humanChoice, getComputerChoice());
-    // console.log(roundWinner + " wins round");
-    // scores[roundWinner] += 1;
-    // }
+    winner = ""
 
-    if(roundWinner == "Human") {
-        HScore ++
+    roundWinner = playRound(humanChoice, getComputerChoice());
+
+    if (roundWinner == "Human") {
+        HScore++
     }
-    else if(roundWinner == "Computer") {
-        CScore ++
+    else if (roundWinner == "Computer") {
+        CScore++
     }
     else {
-        HScore ++
-        CScore ++
+        HScore++
+        CScore++
     }
-    pItem.textContent = "Your Score: " + HScore + " Computer Score: " + CScore;
-    // if (scores["Computer"] === scores["Human"]) {
-    //     return "Game Result: You Tied!"
-    // }
-    // else if (scores["Computer"] < scores["Human"]) {
-    //     return "Game Result: You Win!"
-    // }
-    // else {
-    //     return "Game Result: You Lose."
-    // }
-}
+    
+    if (HScore === 5 && CScore === 5) {
+        winner = "It's a Tie! "
+    }
+    else if (HScore === 5) {
+        winner = "You Win! "
+    }
+    else if (CScore === 5) {
+        winner = "You Lose! "
+    }
 
-console.log("Let's play Rock/Paper/Scissors!");
-// var winner = playGame();
-// console.log(winner);\
+    pItem.textContent = winner + "Your Score: " + HScore + " Computer Score: " + CScore;
+    if (HScore === 5 || CScore === 5) {
+        HScore = 0
+        CScore = 0
+    }
+}
 
 var HScore = 0
 var CScore = 0
+console.log("Let's play Rock/Paper/Scissors!");
